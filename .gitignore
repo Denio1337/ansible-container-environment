@@ -5,10 +5,13 @@ ansible/**/*
 
 # Не игнорируем скрипт для запуска управляющего контейнера
 !ansible/
-!ansible/ansible.cfg
+!ansible/cfg
 !ansible/entrypoint.sh
 
 # Не игнорируем стандартное определение инвентаря
 !ansible/inventories/
 !ansible/inventories/inventory
 
+# Не игнорируем стандартное определение плейбука
+!ansible/playbooks/
+!ansible/playbooks/playbook

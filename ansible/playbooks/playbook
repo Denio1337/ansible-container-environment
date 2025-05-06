@@ -1,0 +1,5 @@
+- name: Test connection to targets
+  hosts: managed
+  tasks:
+    - name: Ping Test
+      ping:
