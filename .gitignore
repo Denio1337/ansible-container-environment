@@ -1,3 +1,14 @@
 .env
-**/*.ini
-!**/inventory.default.ini
+
+# Игнорируем всё в ansible, включая вложенные каталоги
+ansible/**/*
+
+# Не игнорируем скрипт для запуска управляющего контейнера
+!ansible/
+!ansible/ansible.cfg
+!ansible/entrypoint.sh
+
+# Не игнорируем стандартное определение инвентаря
+!ansible/inventories/
+!ansible/inventories/inventory
+
