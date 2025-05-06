@@ -12,7 +12,6 @@ services:
       - managed1
       - managed2
     env_file: .env
-    tty: true
     command: ["./entrypoint.sh"]
 
   managed1:
@@ -37,4 +36,3 @@ services:
 
 networks:
   ansible-net:
-    driver: bridge
