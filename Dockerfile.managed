@@ -1,0 +1,22 @@
+FROM ubuntu:latest
+
+RUN apt-get update && \
+    apt-get install -y openssh-server sudo && \
+    mkdir -p /var/run/sshd && \
+    mkdir -p /root/.ssh && \
+    chmod 700 /root/.ssh
+
+# Установка пароля для root
+RUN echo 'root:password' | chpasswd
+
+# Разрешаем вход по SSH через root и с паролем
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
+    sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config || true
+
+# Убираем обязательное использование TTY для sudo
+RUN echo "Set disable_coredump 0" >> /etc/sudo.conf
+
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D"]

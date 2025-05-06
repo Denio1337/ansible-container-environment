@@ -1,0 +1,35 @@
+services:
+  control:
+    build:
+      context: .
+      dockerfile: Dockerfile.control
+    container_name: control
+    volumes:
+      - ./ansible:/ansible
+    networks:
+      - ansible-net
+    depends_on:
+      - managed1
+      - managed2
+    tty: true
+    command: ["./entrypoint.sh"]
+
+  managed1:
+    build:
+      context: .
+      dockerfile: Dockerfile.managed
+    container_name: managed1
+    networks:
+      - ansible-net
+
+  managed2:
+    build:
+      context: .
+      dockerfile: Dockerfile-managed
+    container_name: managed2
+    networks:
+      - ansible-net
+
+networks:
+  ansible-net:
+    driver: bridge

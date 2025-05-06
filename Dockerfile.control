@@ -1,0 +1,18 @@
+# Используем официальный образ Ubuntu как базу
+FROM ubuntu:latest
+
+# Обновляем систему и устанавливаем Ansible
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository --yes --update ppa:ansible/ansible && \
+    apt-get install -y ansible sshpass python3-distro
+
+# Создаём рабочую директорию
+WORKDIR /ansible
+
+# Очищаем кэш
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Команда по умолчанию — просто запуск bash
+CMD ["bash"]
