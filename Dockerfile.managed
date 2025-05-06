@@ -1,13 +1,18 @@
+# Используем официальный образ Ubuntu как базу
 FROM ubuntu:latest
 
-RUN apt-get update && \
-    apt-get install -y openssh-server sudo && \
+# Обновляем пакеты
+RUN apt-get update
+
+# Устанавливаем и настраиваем SSH-сервер
+RUN apt-get install -y openssh-server sudo && \
     mkdir -p /var/run/sshd && \
     mkdir -p /root/.ssh && \
     chmod 700 /root/.ssh
 
 # Установка пароля для root
-RUN echo 'root:password' | chpasswd
+ARG PASSWORD=password
+RUN echo "root:$PASSWORD" | chpasswd
 
 # Разрешаем вход по SSH через root и с паролем
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \

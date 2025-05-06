@@ -11,6 +11,7 @@ services:
     depends_on:
       - managed1
       - managed2
+    env_file: .env
     tty: true
     command: ["./entrypoint.sh"]
 
@@ -18,6 +19,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.managed
+      args:
+        PASSWORD: ${SSH_PASSWORD}
     container_name: managed1
     networks:
       - ansible-net
@@ -26,6 +29,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.managed
+      args:
+        PASSWORD: ${SSH_PASSWORD}
     container_name: managed2
     networks:
       - ansible-net
