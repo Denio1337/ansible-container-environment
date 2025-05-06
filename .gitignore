@@ -1,1 +1,3 @@
 .env
+**/*.ini
+!**/inventory.default.ini
