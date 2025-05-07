@@ -1,0 +1,44 @@
+- name: Install and configure MariaDB
+  hosts: managed
+  become: yes
+  vars:
+    mysql_db_name: example_db
+    mysql_user_name: example_user
+    mysql_user_password: secure_password
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install MariaDB package
+      package:
+        name: mariadb-server
+        state: present
+
+    - name: Start and enable MariaDB daemon
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+
+    - name: Install python connector to mysql_db
+      package:
+        name: python3-pymysql
+        state: present
+
+    - name: Create new database
+      mysql_db:
+        name: "{{ mysql_db_name }}"
+        login_unix_socket: /run/mysqld/mysqld.sock
+        state: present
+      no_log: yes
+
+    - name: Create new user and configure privileges
+      mysql_user:
+        name: "{{ mysql_user_name }}"
+        password: "{{ mysql_user_password }}"
+        priv: "{{ mysql_db_name }}.*:ALL"
+        login_unix_socket: /run/mysqld/mysqld.sock
+        state: present
+      no_log: yes

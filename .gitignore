@@ -12,6 +12,7 @@ ansible/**/*
 !ansible/inventories/
 !ansible/inventories/inventory
 
-# Не игнорируем стандартное определение плейбука
+# Не игнорируем стандартные плейбуки
 !ansible/playbooks/
-!ansible/playbooks/playbook
+!ansible/playbooks/ping
+!ansible/playbooks/mysql
