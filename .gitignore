@@ -16,3 +16,9 @@ ansible/**/*
 !ansible/playbooks/
 !ansible/playbooks/ping
 !ansible/playbooks/mysql
+!ansible/playbooks/mysql-role
+
+# Не игнорируем стандартные роли
+!ansible/roles/
+!ansible/roles/mysql-role/
+!ansible/roles/mysql-role/**/*

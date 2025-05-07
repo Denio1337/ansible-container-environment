@@ -1,2 +1,3 @@
 [defaults]
 inventory = /ansible/inventories
+roles_path = /ansible/roles

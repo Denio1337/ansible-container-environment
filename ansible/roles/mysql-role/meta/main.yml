@@ -1,0 +1,8 @@
+galaxy_info:
+  author: Denio1337
+  description: Role for basic MySQL installation
+  company: No company
+  license: MIT
+  min_ansible_version: 2.1
+  galaxy_tags: []
+dependencies: []

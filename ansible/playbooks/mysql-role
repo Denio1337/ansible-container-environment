@@ -1,0 +1,9 @@
+- name: Install and configure MariaDB
+  hosts: managed
+  become: yes
+  vars:
+    mysql_db_name: example_db
+    mysql_user_name: example_user
+    mysql_user_password: secure_password
+  roles:
+    - mysql-role
